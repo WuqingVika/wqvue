@@ -10,7 +10,7 @@
       </div>
     </header>
     <div class="container">
-      <Add/>
+      <Add :addComment="addComment"/>
       <List :comments="comments"/>
     </div>
   </div>
@@ -23,7 +23,7 @@ import List from './components/List.vue'
 export default {
   data () {
     return {
-      comments: [{
+      comments: [{// 数据在哪个组件，更新数据的行为（方法）就应该定义在哪个组件
         name: 'xiaopeng',
         content: '向小吴筒子学习'
       }, {
@@ -32,7 +32,12 @@ export default {
       }]
     }
   },
-
+  methods: {
+    // 添加评论
+    addComment (comment) {
+      this.comments.unshift(comment)// 塞到最前面
+    }
+  },
   components: {
     Add,
     List
