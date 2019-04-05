@@ -1,11 +1,7 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <!--自定义事件1）方式比较简单，常用，
-      不过专用于父子组件之间传递，什么意思就是A传到B
-      给TodoHeader标签对象绑定addTodo事件监听-->
-      <!--<TodoHeader @addTodo="addTodo"/> -->
-      <TodoHeader ref="wqheader"/> <!--自定义事件2）这个使用起来比较复杂，不常用-->
+      <TodoHeader :addTodo="addTodo"/>
       <todo-list :todos="todos" :deleteTodo="deleteTodo"/>
       <todo-footer :todos="todos"
                    :deleteCompleteTodos="deleteCompleteTodos"
@@ -40,11 +36,6 @@ export default {
         window.localStorage.setItem('todos_key', JSON.stringify(newValue))
       }
     }
-  },
-  mounted () { // 执行异步代码
-    // 给<TodoHeader/>绑定addTodo事件监听
-    // this.$on('addTodo', this.addTodo)// 给app绑定的监听，不对的
-    this.$refs.wqheader.$on('addTodo', this.addTodo)
   },
   methods: {
     addTodo (todo) {

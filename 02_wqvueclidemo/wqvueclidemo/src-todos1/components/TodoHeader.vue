@@ -14,6 +14,7 @@ export default {
     }
   },
   props: {
+    addTodo: Function
   },
   methods: {
     add () {
@@ -29,8 +30,7 @@ export default {
         compete: false
       }
       // 3.添加到todos
-      // this.addTodo(todo)
-      this.$emit('addTodo', todo) // 触发自定义事件
+      this.addTodo(todo)
       // 4.清除输入框内容
       this.title = ''
     }
