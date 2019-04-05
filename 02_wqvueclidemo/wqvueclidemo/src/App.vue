@@ -1,54 +1,51 @@
 <template>
-  <div>
-    <header class="site-header jumbotron">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <h1>请发表对Wuqingvika的评论</h1>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div class="container">
-      <Add :addComment="addComment"/>
-      <List :comments="comments" :deleteComment="deleteComment"/>
+  <div class="todo-container">
+    <div class="todo-wrap">
+      <TodoHeader :addTodo="addTodo"/>
+      <todo-list :todos="todos"/>
+      <todo-footer/>
     </div>
   </div>
 </template>
 
 <script>
-import Add from './components/Add.vue'
-import List from './components/List.vue'
+import TodoHeader from './components/TodoHeader'
+import TodoList from './components/TodoList'
+import TodoFooter from './components/TodoFooter'
 
 export default {
+  name: 'App',
   data () {
     return {
-      comments: [{// 数据在哪个组件，更新数据的行为（方法）就应该定义在哪个组件
-        name: 'xiaopeng',
-        content: '向小吴筒子学习'
+      todos: [{
+        title: '学习vue编程', compete: false
       }, {
-        name: 'mengmeng',
-        content: '向小吴筒子学习2'
+        title: '学习java编程', compete: true
       }]
     }
   },
   methods: {
-    // 添加评论
-    addComment (comment) {
-      this.comments.unshift(comment)// 塞到最前面
-    },
-    // 删除指定下标的评论
-    deleteComment (index) {
-      this.comments.splice(index, 1)
+    addTodo (todo) {
+      this.todos.unshift(todo)
     }
   },
   components: {
-    Add,
-    List
+    TodoHeader,
+    TodoList,
+    TodoFooter
   }
 }
 </script>
 
 <style scoped>
-
+  /*app*/
+  .todo-container {
+    width: 600px;
+    margin: 0 auto;
+  }
+  .todo-container .todo-wrap {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
 </style>

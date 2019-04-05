@@ -88,7 +88,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Hello Wuqingvika! npm run dev/start;npm run build;npm -g install serve;serve dist'
+      msg: 'Hello Wuqingvika! npm start/run dev;npm run build;npm -g install serve;serve dist'
     }
   }
 }
