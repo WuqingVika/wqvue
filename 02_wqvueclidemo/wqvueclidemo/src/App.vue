@@ -28,13 +28,13 @@ import PubSub from 'pubsub-js'
 import TodoHeader from './components/TodoHeader'
 import TodoList from './components/TodoList'
 import TodoFooter from './components/TodoFooter'
-
+import storageUtil from './util/storageUtil'
 export default {
   name: 'App',
   data () {
     return {
       // 从localstorage中读取todos 需要深度监视
-      todos: JSON.parse(window.localStorage.getItem('todos_key') || '[]')/* [{
+      todos: storageUtil.readTodos()/* [{
         title: '学习vue编程', compete: false
       }, {
         title: '学习java编程', compete: true
@@ -45,10 +45,11 @@ export default {
     // 深度监视
     todos: {
       deep: true, // 代表深度监视
-      handler: function (newValue) {
+      /* handler: function (newValue) {
         // 将todos最新的值 保存到localstorage中
-        window.localStorage.setItem('todos_key', JSON.stringify(newValue))
-      }
+        storageUtil.saveTodos(newValue)
+      } */
+      handler: storageUtil.saveTodos
     }
   },
   computed: {
