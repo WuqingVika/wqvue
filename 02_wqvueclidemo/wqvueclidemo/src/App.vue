@@ -7,9 +7,15 @@
       <!--<TodoHeader @addTodo="addTodo"/> -->
       <TodoHeader ref="wqheader"/> <!--自定义事件2）这个使用起来比较复杂，不常用-->
       <todo-list :todos="todos" />  <!--cnpm install --save pubsub-js 通过消息订阅与发布可以不光只是父子间的函数调用。-->
-      <todo-footer :todos="todos"
+      <!--<todo-footer :todos="todos"
                    :deleteCompleteTodos="deleteCompleteTodos"
-                   :selectAllTodos="selectAllTodos"/>
+                   :selectAllTodos="selectAllTodos"/>-->
+      <!--通过slot通信的是标签，而其他的是数据 -->
+      <todo-footer>
+         <input type="checkbox" v-model="isAllChecked" slot="checkAll"/>
+        <span slot="count">已完成{{completeSize}}/ 全部{{todos.length}}</span>
+        <button slot="delete" class="btn btn-danger" v-show="completeSize" @click="deleteCompleteTodos">清除已完成任务</button>
+      </todo-footer>
     </div>
   </div>
 </template>
@@ -42,6 +48,19 @@ export default {
       handler: function (newValue) {
         // 将todos最新的值 保存到localstorage中
         window.localStorage.setItem('todos_key', JSON.stringify(newValue))
+      }
+    }
+  },
+  computed: {
+    completeSize () {
+      return this.todos.reduce((preTotal, todo) => preTotal + (todo.compete ? 1 : 0), 0)
+    },
+    isAllChecked: {
+      get () {
+        return this.completeSize === this.todos.length && this.completeSize > 0
+      },
+      set (value) { // value是当前checkbox的最新的值 (true/false)
+        this.selectAllTodos(value)
       }
     }
   },
