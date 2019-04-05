@@ -2,8 +2,10 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <TodoHeader :addTodo="addTodo"/>
-      <todo-list :todos="todos"/>
-      <todo-footer/>
+      <todo-list :todos="todos" :deleteTodo="deleteTodo"/>
+      <todo-footer :todos="todos"
+                   :deleteCompleteTodos="deleteCompleteTodos"
+                   :selectAllTodos="selectAllTodos"/>
     </div>
   </div>
 </template>
@@ -27,6 +29,17 @@ export default {
   methods: {
     addTodo (todo) {
       this.todos.unshift(todo)
+    },
+    deleteTodo (index) {
+      this.todos.splice(index, 1)
+    },
+    // 删除所有选中的todo
+    deleteCompleteTodos () {
+      this.todos = this.todos.filter(todo => !todo.compete)
+    },
+    // 全选/全不选
+    selectAllTodos (isChecked) {
+      this.todos.forEach(todo => { todo.compete = isChecked })
     }
   },
   components: {
