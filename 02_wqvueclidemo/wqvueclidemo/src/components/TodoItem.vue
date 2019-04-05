@@ -41,7 +41,6 @@ export default {
       if (window.confirm(`确认删除${todo.title}`)) {
         deleteTodo(index)
       }
-      this.deleteTodo(this.index)
     }
   },
   name: 'TodoItem'
