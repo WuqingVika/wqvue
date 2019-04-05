@@ -6,15 +6,19 @@
       给TodoHeader标签对象绑定addTodo事件监听-->
       <!--<TodoHeader @addTodo="addTodo"/> -->
       <TodoHeader ref="wqheader"/> <!--自定义事件2）这个使用起来比较复杂，不常用-->
-      <todo-list :todos="todos" :deleteTodo="deleteTodo"/>
+      <todo-list :todos="todos" />  <!--cnpm install --save pubsub-js 通过消息订阅与发布可以不光只是父子间的函数调用。-->
       <todo-footer :todos="todos"
                    :deleteCompleteTodos="deleteCompleteTodos"
                    :selectAllTodos="selectAllTodos"/>
     </div>
   </div>
 </template>
-
+<!--
+绑定事件监听   ----订阅消息
+触发事件  ----发布消息
+-->
 <script>
+import PubSub from 'pubsub-js'
 import TodoHeader from './components/TodoHeader'
 import TodoList from './components/TodoList'
 import TodoFooter from './components/TodoFooter'
@@ -43,8 +47,13 @@ export default {
   },
   mounted () { // 执行异步代码
     // 给<TodoHeader/>绑定addTodo事件监听
-    // this.$on('addTodo', this.addTodo)// 给app绑定的监听，不对的
+    // this.$on('addTodo', this.addTodo)// 给app绑定的监听，不对的！！！！！
     this.$refs.wqheader.$on('addTodo', this.addTodo)
+
+    // 订阅消息
+    PubSub.subscribe('deleteTodo', (msg, index) => {
+      this.deleteTodo(index)
+    })
   },
   methods: {
     addTodo (todo) {
