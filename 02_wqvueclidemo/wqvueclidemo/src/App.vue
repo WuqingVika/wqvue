@@ -1,45 +1,37 @@
 <template>
-  <div v-if="!repoUrl">loading...</div>
-  <div v-else>most star repo is <a :href="repoUrl">{{repoName}}</a></div>
-</template>
-<script>
-import axios from 'axios'
-export default {
-  data () {
-    return {
-      repoUrl: '',
-      repoName: ''
-    }
-  },
-  mounted () {
-    // 发ajax请求
-    // 这是github一个免费测试接口用来根据q相关内容查找出星星（关注）数从高到低的项目
-    const url = `https://api.github.com/search2/repositories?q=vue&sort=stars`
-    /* this.$http.get(url).then(response => {
-      // 成功了
-      const result = response.data
-      // 得到第一个repo(最受欢迎的repo)
-      const mostRepo = result.items[0]
-      this.repoUrl = mostRepo.html_url
-      this.repoName = mostRepo.name
-    }, response => {
-      alert('请求失败')
-    }) */
+  <div>
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-8">
+        <div class="page-header"><h2>Router Test</h2></div>
+      </div>
+    </div>
 
-    // 使用axios发送ajax请求
-    axios.get(url).then(response => {
-      // 成功了
-      const result = response.data
-      // 得到第一个repo(最受欢迎的repo)
-      const mostRepo = result.items[0]
-      this.repoUrl = mostRepo.html_url
-      this.repoName = mostRepo.name
-    }).catch(error => {
-      alert('请求失败!')
-    })
-  }
-}
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+          <!--生成路由链接-->
+          <router-link to="/about" class="list-group-item">About</router-link>
+          <router-link to="/home" class="list-group-item">Home</router-link>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-body">
+            <!--显示当前组件-->
+            <keep-alive>
+              <router-view msg="abc"></router-view>
+            </keep-alive>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {}
 </script>
 
 <style>
+
 </style>
