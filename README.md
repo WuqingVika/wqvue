@@ -3,8 +3,8 @@ vue2.x学习记录
 > 我安装的node.js版本号10.15.3 (includes npm 6.4.1)
 
 
+### 环境基础配置 全局和缓存目录
 
-###（1）环境基础配置 全局和缓存目录
 > npm config set prefix "D:\wqsoftware\nodejs\wq_node_global"
 
 > npm config set cache "D:\wqsoftware\nodejs\wq_node_cache"
@@ -29,7 +29,7 @@ prefix=D:\wqsoftware\nodejs\wq_node_global
 
 <hr>
 
-### (2)vue 常用命令
+### vue 常用命令
 
 >  如果需要下载时，将npm替换成cnpm比较快一点。 如果是环境运行相关的操作，则直接使用npm
 
@@ -42,6 +42,7 @@ prefix=D:\wqsoftware\nodejs\wq_node_global
 npm -g install serve;
 serve dist
 cnpm install vue-resource --save
+### vue 插件
 
 #### 消息订阅发布组件
 > npm install --save pubsub-js
