@@ -1,13 +1,16 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+/*
+入口js
+ */
 import Vue from 'vue'
-import App from './App'
-
-Vue.config.productionTip = false
+import Counter from './Counter.vue'
+import store from './store'
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  components: { App },
-  template: '<App/>'
+  components: {
+    Counter
+  },
+  template: '<Counter/>',
+  store // 注册上vuex的store: 所有组件对象都多一个属性$store
 })

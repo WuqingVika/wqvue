@@ -57,14 +57,14 @@ cnpm install vue-resource --save
 
 > 按需引入 cnpm install babel-plugin-component  然后需要修改.babelrc文件   添加按需打包的配置
 
-
 > 参考文档
 http://mint-ui.github.io/docs/#/zh-cn2/quickstart
-<hr>
+
 
 #### vue-router
 npm install vue-router --save
 
+<hr>
 
 ### 补充项
 > 复制项目命名wqvuexdemo 注意不要拷贝.idea 和 node_modules
